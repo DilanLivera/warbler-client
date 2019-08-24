@@ -5,46 +5,23 @@ import { connect } from "react-redux";
 import Homepage from "../components/Homepage";
 import AuthForm from "../components/AuthForm";
 import { authUser } from "../store/actions/auth";
-
-// const Main = props => {
-//   const { authUser } = this.props;
-//   return (
-//     <div className="container">
-//       <Switch>
-//         <Route 
-//           exact path="/" 
-//           render={ props => <Homepage { ...props } /> }
-//         />
-//         <Route 
-//           exact path="/signIn" 
-//           render={ props => (
-//             <AuthForm onAuth={ authUser } buttonText="Log in" heading="Welcome back." { ...props } />
-//           )} 
-//         />
-//         <Route 
-//           exact path="/signUp" 
-//           render={ props => (
-//             <AuthForm signUp onAuth={ authUser } buttonText="Sign me up!" heading="Join Warbler today." { ...props } />
-//           )} 
-//         />
-//       </Switch>
-//     </div>
-//   );
-// };
+import { removeError } from "../store/actions/errors";
 
 const Main = props => {
-  const { authUser } = props;
+  const { authUser, errors } = props;
   return (
     <div className="container">
       <Switch>
-        <Route exact path="/" render={props => <Homepage {...props} />} />
+        <Route exact path="/" render={ props => <Homepage {...props} />} />
         <Route
           exact
           path="/signin"
-          render={props => {
+          render={ props => {
             return (
               <AuthForm
-                onAuth={authUser}
+                removeError={ removeError}
+                errors={ errors }
+                onAuth={ authUser }
                 buttonText="Log in"
                 heading="Welcome Back."
                 {...props}
@@ -55,10 +32,12 @@ const Main = props => {
         <Route
           exact
           path="/signup"
-          render={props => {
+          render={ props => {
             return (
               <AuthForm
-                onAuth={authUser}
+              removeError={ removeError}
+                errors={ errors }
+                onAuth={ authUser }
                 signUp
                 buttonText="Sign me up!"
                 heading="Join Warbler today."
@@ -74,7 +53,8 @@ const Main = props => {
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    errors: state.errors
   };
 }
 
