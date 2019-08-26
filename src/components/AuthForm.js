@@ -22,9 +22,14 @@ export default class AuthForm extends Component {
 
   authUser() {
     const authType = this.props.signUp ? "signUp" : "signIn";
-    this.props.onAuth(authType, this.state).then(() => { 
-        console.log("Login Successful!.")
-    });
+    this.props.onAuth(authType, this.state)
+      .then(() => { 
+        // console.log("Login Successful!.")
+        this.props.history.push("/")
+      })
+      .catch(() => {
+        return;
+      })
   }
 
   handleSubmit(evt) {
