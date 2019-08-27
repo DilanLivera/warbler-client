@@ -5,7 +5,7 @@ import UserAside from "./UserAside";
 const MessageTimeLine = ({ profileImageUrl, userName }) => {
   return (
     <div className="row">
-      <UserAside profileImageUrl={ profileImageUrl} userName={ userName } />
+      <UserAside profileImageUrl={ profileImageUrl } userName={ userName } />
       <MessageList />
     </div>
   )
